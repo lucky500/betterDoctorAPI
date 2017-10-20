@@ -1,0 +1,20 @@
+{
+  "name": "better-doctor-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucky500/betterDoctorAPI.git"
+  },
+  "author": "Luciano Oliveira",
+  "license": "ISC",
+  "devDependencies": {
+    "json-loader": "^0.5.7",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.2"
+  }
+}
