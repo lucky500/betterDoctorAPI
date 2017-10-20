@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 
 let config = {
-  entry: './src/app.js',
+  entry: './src/js/app.js',
   output: {
     filename: 'output.js'
   }
