@@ -1,3 +1,4 @@
+require('../sass/styles.scss');
 // $(document).ready(init);
 
 // //var betterDoctorApi = require('./betterdoctorapi.js');
