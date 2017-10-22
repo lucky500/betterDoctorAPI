@@ -5,7 +5,7 @@
   <title>Doctor Lookup</title>
   <link rel="stylesheet" href="src/css/styles.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="output.js"></script>
+  <!-- <script src="output.js"></script> -->
 </head>
 <body>
   <div class="container">
@@ -14,18 +14,25 @@
         <h4>Find a Doctor in Seattle:</h4>
         <p>What Are your current symptoms?</p>
         <input type="text" class="symptoms">
+        <button type="button" id="update-symptoms">Submit</button>
       </div>
       <div class="col s6">
         <form id="doctor-by-name">
           <h4>Find a Doctor by name in Seattle:</h4>
           <p>What is the doctor's name?</p>
           <input type="text" class="doctor-name">
-          <button type="button" id="update">Submit</button>
+          <button type="button" id="update-doctor">Submit</button>
         </form>
+        <div class="doctor-by-name-container"></div>
         <div class="output"></div>
         <div id="errors"></div>
       </div>
     </div>
   </div>
+  <script id="by-name-template" type="text/x-handlebars-template">
+    
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+  <script src="output.js"></script>
 </body>
 </html>
