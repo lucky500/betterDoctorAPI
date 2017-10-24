@@ -3,7 +3,7 @@ const path = require("path");
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 
 let config = {
-  entry: './src/js/app.js',
+  entry: './src/js/interface.js',
   output: {
     path: path.resolve(__dirname, "./build"),
     filename: 'output.js'
@@ -33,7 +33,14 @@ let config = {
   },
   plugins: [
     new ExtractTextWebpackPlugin('style.css')
-  ]
+  ],
+  devServer: {
+    contentBase: path.resolve(__dirname, ''),
+    historyApiFallback: true,
+    inline: true,
+    open: true
+  },
+  devtool: 'eval-source-map'
 }
 
 module.exports = config;

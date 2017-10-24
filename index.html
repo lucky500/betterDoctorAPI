@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Doctor Lookup</title>
+    <title>Handlebars</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
   <link rel="stylesheet" href="build/style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <!-- <script src="output.js"></script> -->
 </head>
 <body>
   <div class="container">
@@ -15,6 +15,7 @@
         <p>What Are your current symptoms?</p>
         <input type="text" class="symptoms">
         <button type="button" id="update-symptoms">Submit</button>
+        <div id="query-container"></div>
       </div>
       <div class="col s6">
         <form id="doctor-by-name">
@@ -23,15 +24,24 @@
           <input type="text" class="doctor-name">
           <button type="button" id="update-doctor">Submit</button>
         </form>
-        <div class="doctor-by-name-container"></div>
-        <div class="output"></div>
+        <div id="doctor-container"></div>
         <div id="errors"></div>
       </div>
     </div>
   </div>
-  <script id="by-name-template" type="text/x-handlebars-template">
-    
+  <script id="raw-query-template" type="text/x-handlebars-template">
+      {{#each data}}
+        {{#each specialties}}
+          <p>{{description}}</p>
+        {{/each}}
+      {{/each}}
   </script>
+  <script id="raw-doctor-template" type="text/x-handlebars-template">
+      {{#each data}}
+        <p>{{profile.last_name}}</p>
+      {{/each}}
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
   <script src="./build/output.js"></script>
 </body>
