@@ -1,5 +1,5 @@
 const apiKey = require('./../../.env').apiKey;
-import { ApiCall } from './app';
+import { ApiCall } from './../js/app';
 
 $(document).ready(function(){
   
