@@ -19,13 +19,9 @@ $(document).ready(function(){
 
   function createSymptomHTML(symptomsData){
     let rawTemplate = document.getElementById("raw-query-template").innerHTML;
-    console.log(rawTemplate);
     let compiledTemplate = Handlebars.compile(rawTemplate);
-    console.log(compiledTemplate);
     let generatedHTML = compiledTemplate(symptomsData);
-    console.log(generatedHTML);
     let htmlContainer = document.getElementById('query-container');
-    htmlContainer.innerHTML = generatedHTML;
     console.log(htmlContainer);
   }
 
@@ -33,8 +29,9 @@ $(document).ready(function(){
   $('#update-doctor').on('click', function() {
     promise = new ApiCall();
     let doctorName = document.querySelector('.doctor-name').value;
-    promise.get(`https://api.betterdoctor.com/2016-03-01/doctors?first_name=${doctorName}&skip=0&limit=10&user_key=${apiKey}`)
+    promise.get(`https://api.betterdoctor.com/2016-03-01/doctors?name=${doctorName}&skip=0&limit=10&user_key=${apiKey}`)
     .then(function(nameData){
+      console.log(nameData);
         createNameHTML(nameData);
       }).catch(function(error){
         console.log(error);

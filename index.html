@@ -38,7 +38,16 @@
   </script>
   <script id="raw-doctor-template" type="text/x-handlebars-template">
       {{#each data}}
+        <p>{{profile.first_name}}</p>
         <p>{{profile.last_name}}</p>
+        {{#each practices}}
+          <div class="">
+            <p>{{visit_address.street}}</p>
+            <p>{{visit_address.city}}</p>
+            <p>{{visit_address.state}}</p>
+            <p>{{accepts_new_patients}}</p>
+          </div>
+        {{/each}}
       {{/each}}
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
