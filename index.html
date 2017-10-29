@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Doctor Lookup</title>
     <title>Handlebars</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
+  <link rel="stylesheet" href="build/css/vendor.css">
   <link rel="stylesheet" href="build/css/styles.css">
 </head>
 <body>
@@ -20,13 +20,40 @@
       <div class="col s6">
         <form id="doctor-by-name">
           <h4>Find a Doctor by name in Seattle:</h4>
-          <p>What is the doctor's name?</p>
+          <label>What is the doctor's name?</label>
           <input type="text" class="doctor-name">
+          <div class="row">
+            <div class="input-field col s6">
+              <label>In what city?</label>
+              <input type="text" id="city">
+            </div>
+            <div class="input-field col s6 right-col">
+              <select id="states">
+                <option value="" disabled selected>Choose your option</option>
+              </select>
+              <label>State:</label>
+            </div>
+          </div>      
           <button type="button" id="update-doctor">Submit</button>
         </form>
         <div id="doctor-container"></div>
-        <div id="errors"></div>
       </div>
+    </div>
+  </div>
+  <div class="card" style="width: 600px">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="http://via.placeholder.com/350x250">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+      <p><a href="#">This is a link</a></p>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque delectus provident, reprehenderit voluptatibus odio officia veritatis error ex unde tenetur aliquid debitis aspernatur. Iste dolore natus iusto fuga hic.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem, voluptatibus, ex. Voluptatibus ipsum inventore repudiandae consequuntur, blanditiis, asperiores autem accusantium rerum natus debitis suscipit. Velit incidunt adipisci modi cupiditate facilis?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum quas tenetur nihil id. Totam laborum tenetur dolorum voluptas nihil autem eligendi, aut dolorem. Eaque consectetur praesentium, magni nihil laboriosam pariatur.</p>
     </div>
   </div>
   <script id="raw-query-template" type="text/x-handlebars-template">
@@ -37,21 +64,33 @@
       {{/each}}
   </script>
   <script id="raw-doctor-template" type="text/x-handlebars-template">
+    {{#if data}}
       {{#each data}}
         <p>{{profile.first_name}}</p>
         <p>{{profile.last_name}}</p>
-        {{#each practices}}
-          <div class="">
-            <p>{{visit_address.street}}</p>
-            <p>{{visit_address.city}}</p>
-            <p>{{visit_address.state}}</p>
-            <p>{{accepts_new_patients}}</p>
-          </div>
-        {{/each}}
+          {{#if practices}}
+            {{#each practices}}
+              <div class="">
+                <p>{{visit_address.street}}</p>
+                <p>{{visit_address.city}}</p>
+                <p>{{visit_address.state}}</p>
+                {{#if accepts_new_patients}}
+                  <p>We are accepting new patients</p>
+                  {{else}}
+                  <p>Not accepting patients at this moment.</p>
+                {{/if}}
+              </div>
+            {{/each}}
+          {{else}}
+            <p>no office information</p>
+          {{/if}}
       {{/each}}
+    {{else}}
+      <p>no doctor with that name</p>
+    {{/if}}
   </script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+  <script src="./build/js/vendor.min.js"></script>
   <script src="./build/js/app.js"></script>
 </body>
 </html>
