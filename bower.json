@@ -14,7 +14,7 @@
   "dependencies": {
     "jquery": "^3.2.1",
     "materialize": "^0.100.2",
-    "moment": "^2.19.1"
+    "font-awesome": "fontawesome#^4.7.0"
   },
   "authors": [
     "Luciano Oliveira <luciano101@msn.com>"

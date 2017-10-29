@@ -1,9 +1,19 @@
-$variable: yellow;
-
-body {
-  background-color: $variable;
-}
 
 .right-col {
   // margin-top: 59px;
+}
+
+.accepting {
+  color: #27ae60;
+  font-weight: 600;
+}
+
+.fa-times-circle-o {
+  color: #e74c3c;
+}
+
+.more-info {
+  color: #3498db !important;
+  cursor: pointer;
+  text-decoration: underline;
 }

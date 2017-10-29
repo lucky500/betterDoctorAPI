@@ -22,6 +22,13 @@ var gulp            = require('gulp'),
           'dist/js/materialize.js',
         ],
       },
+      "font-awesome": {
+        "main": [
+          "scss/font-awesome.scss",
+          "css/font-awesome.css",
+          "./fonts/*"
+        ]
+      }
     },
   });
 

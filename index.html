@@ -5,6 +5,7 @@
   <title>Doctor Lookup</title>
     <title>Handlebars</title>
   <link rel="stylesheet" href="build/css/vendor.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="build/css/styles.css">
 </head>
 <body>
@@ -21,39 +22,23 @@
         <form id="doctor-by-name">
           <h4>Find a Doctor by name in Seattle:</h4>
           <label>What is the doctor's name?</label>
-          <input type="text" class="doctor-name">
+          <input type="text" class="doctor-name" required>
           <div class="row">
             <div class="input-field col s6">
-              <label>In what city?</label>
-              <input type="text" id="city">
+              <label>In what city? (required)</label>
+              <input type="text" id="city" required>
             </div>
             <div class="input-field col s6 right-col">
-              <select id="states">
+              <select id="states" required>
                 <option value="" disabled selected>Choose your option</option>
               </select>
               <label>State:</label>
             </div>
           </div>      
-          <button type="button" id="update-doctor">Submit</button>
+          <button type="submit" id="update-doctor">Submit</button>
         </form>
         <div id="doctor-container"></div>
       </div>
-    </div>
-  </div>
-  <div class="card" style="width: 600px">
-    <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" src="http://via.placeholder.com/350x250">
-    </div>
-    <div class="card-content">
-      <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-      <p><a href="#">This is a link</a></p>
-    </div>
-    <div class="card-reveal">
-      <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-      <p>Here is some more information about this product that is only revealed once clicked on.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque delectus provident, reprehenderit voluptatibus odio officia veritatis error ex unde tenetur aliquid debitis aspernatur. Iste dolore natus iusto fuga hic.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem, voluptatibus, ex. Voluptatibus ipsum inventore repudiandae consequuntur, blanditiis, asperiores autem accusantium rerum natus debitis suscipit. Velit incidunt adipisci modi cupiditate facilis?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum quas tenetur nihil id. Totam laborum tenetur dolorum voluptas nihil autem eligendi, aut dolorem. Eaque consectetur praesentium, magni nihil laboriosam pariatur.</p>
     </div>
   </div>
   <script id="raw-query-template" type="text/x-handlebars-template">
@@ -66,28 +51,48 @@
   <script id="raw-doctor-template" type="text/x-handlebars-template">
     {{#if data}}
       {{#each data}}
-        <p>{{profile.first_name}}</p>
-        <p>{{profile.last_name}}</p>
-          {{#if practices}}
-            {{#each practices}}
-              <div class="">
-                <p>{{visit_address.street}}</p>
-                <p>{{visit_address.city}}</p>
-                <p>{{visit_address.state}}</p>
-                {{#if accepts_new_patients}}
-                  <p>We are accepting new patients</p>
-                  {{else}}
-                  <p>Not accepting patients at this moment.</p>
-                {{/if}}
-              </div>
-            {{/each}}
-          {{else}}
-            <p>no office information</p>
-          {{/if}}
-      {{/each}}
-    {{else}}
-      <p>no doctor with that name</p>
-    {{/if}}
+        <div class="card" style="width: 300px">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" src="{{profile.image_url}}">
+          </div>
+          <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">
+              {{profile.first_name}} {{profile.last_name}}<i class="fa fa-ellipsis-v right" aria-hidden="true"></i></span>
+            <p class="activator more-info">More info</p>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">
+              <a href="#">{{profile.first_name}} {{profile.last_name}}</a><i class="fa fa-times-circle-o fa-2x right" aria-hidden="true"></i></span>
+            <br>
+            {{#if practices}}
+              {{#each practices}}
+                <div class="">
+                  {{#if accepts_new_patients}}
+                    <p class="accepting">We are accepting new patients!</p>
+                    {{else}}
+                    <p>Not accepting patients at this moment.</p>
+                  {{/if}}
+                  <p><span>Address:</span> {{visit_address.street}}</p> 
+                  <p><span>City:</span> {{visit_address.city}}<span>State:</span> {{visit_address.state}}</p>
+                  {{#if phones}}
+                    {{#each phones}}
+                    <p><span>Phone:</span> {{formatPhoneNumber number}}</p> 
+                    <hr>
+                    {{/each}} 
+                    {{else}}
+                    <p>No Phone Available:</p> 
+                  {{/if}}                 
+                </div>
+              {{/each}}
+            {{else}}
+              <p>no office information</p>
+            {{/if}}
+        </div>
+        </div>
+    {{/each}}
+        {{else}}
+          <p>no doctor with that name</p>
+        {{/if}}  
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
   <script src="./build/js/vendor.min.js"></script>
