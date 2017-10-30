@@ -44,17 +44,54 @@
       </div>
     </div>      
   <script id="raw-query-template" type="text/x-handlebars-template">
+    {{#if data}}
       {{#each data}}
-        {{#each specialties}}
-          <p>{{description}}</p>
-        {{/each}}
+        <div class="col s12 m6 l4">
+          <div class="card teal card-specialty">
+            <div class="card-title">
+              {{profile.first_name}} {{profile.last_name}}
+            </div>
+            <div class="card-content">
+              <span class="white-text">
+              {{#each specialties}}
+                {{description}}
+              {{/each}}
+              </span>
+            </div>
+            <div class="card-action">
+              {{#each specialties}}
+              <p>{{name}}</p>
+              {{/each}}
+              <br>
+            </div>
+            <div class="practice-address">
+              <div>
+                <span>
+                  {{practices.[0].visit_address.street}}, 
+                  {{practices.[0].visit_address.city}},
+                  {{practices.[0].visit_address.state}}
+                </span> 
+              </div>
+              <div class="accepting-new-patients">
+                {{#if practices.[0].accepts_new_patients}}
+                  <p class="accepting">We are accepting new patients!</p>
+                  {{else}}
+                  <p>Not accepting patients at this moment.</p>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
       {{/each}}
+      {{else}}
+      <p>no doctor with that specialty</p>
+    {{/if}}
   </script>
   <script id="raw-doctor-template" type="text/x-handlebars-template">
     {{#if data}}
       {{#each data}}
       <div class="col s12 m4 l3">
-        <div class="card">
+        <div class="card card-name">
           <div class="card-image waves-effect waves-block waves-light">
             <img class="activator" src="{{profile.image_url}}">
           </div>
