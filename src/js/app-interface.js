@@ -2,8 +2,10 @@ const apiKey = require('./../../.env').apiKey;
 import { ApiCall } from './../js/app';
 
 $(document).ready(function(){
-  
-  let promise;
+
+  let promise,
+      nameHtmlContainer;
+
   function loopState(){
     const statesAbbreviation = [ "AK","AL","AR","AS","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","PR","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY" ];
       let states = $('#states');
@@ -29,9 +31,9 @@ $(document).ready(function(){
     let rawTemplate = document.getElementById("raw-query-template").innerHTML;
     let compiledTemplate = Handlebars.compile(rawTemplate);
     let generatedHTML = compiledTemplate(symptomsData);
-    let htmlContainer = document.getElementById('query-container');
-    htmlContainer.innerHTML = generatedHTML;
-    console.log(htmlContainer);
+    nameHtmlContainer = document.getElementById('doctor-container');
+    nameHtmlContainer.innerHTML = '';
+    nameHtmlContainer.innerHTML = generatedHTML;
   }
 
 
@@ -40,10 +42,9 @@ $(document).ready(function(){
     let doctorName = document.querySelector('.doctor-name').value;
     let city = $('#city').val();
     let selectedState = $( "#states option:selected" ).text().toLowerCase();
-    console.log(selectedState);
     promise.get(`https://api.betterdoctor.com/2016-03-01/doctors?name=${doctorName}&location=${selectedState}-${city}&skip=0&limit=10&user_key=${apiKey}`)
     .then(function(nameData){
-      console.log(nameData);
+      console.log('nameData:', nameData);
         createNameHTML(nameData);
       }).catch(function(error){
         console.log(error);
@@ -54,8 +55,9 @@ $(document).ready(function(){
     let rawTemplate = document.getElementById("raw-doctor-template").innerHTML;
     let compiledTemplate = Handlebars.compile(rawTemplate);
     let ourGeneratedHTML = compiledTemplate(doctorData);
-    let htmlContainer = document.getElementById('doctor-container');
-    htmlContainer.innerHTML = ourGeneratedHTML;
+    nameHtmlContainer = document.getElementById('doctor-container');
+    nameHtmlContainer.innerHTML = '';
+    nameHtmlContainer.innerHTML = ourGeneratedHTML;
   }
 
   Handlebars.registerHelper("formatPhoneNumber", function(phoneNumber) {

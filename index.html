@@ -11,36 +11,38 @@
 <body>
   <div class="container">
     <div class="row">
-      <div class="col s6">
-        <h4>Find a Doctor in Seattle:</h4>
-        <p>What Are your current symptoms?</p>
-        <input type="text" class="symptoms">
-        <button type="button" id="update-symptoms">Submit</button>
-        <div id="query-container"></div>
-      </div>
-      <div class="col s6">
-        <form id="doctor-by-name">
-          <h4>Find a Doctor by name in Seattle:</h4>
-          <label>What is the doctor's name?</label>
-          <input type="text" class="doctor-name" required>
+      <div class="col s12 m6">
+        <div id="doctor-by-name">
+          <h5>Find a Doctor:</h5>
+          <label>Find a Doctor by name:</label>
+          <input type="text" class="doctor-name">
           <div class="row">
             <div class="input-field col s6">
               <label>In what city? (required)</label>
-              <input type="text" id="city" required>
+              <input type="text" id="city">
             </div>
             <div class="input-field col s6 right-col">
-              <select id="states" required>
+              <select id="states">
                 <option value="" disabled selected>Choose your option</option>
               </select>
               <label>State:</label>
             </div>
           </div>      
-          <button type="submit" id="update-doctor">Submit</button>
-        </form>
-        <div id="doctor-container"></div>
+          <button type="button" id="update-doctor">Submit</button>
+        </div>
+      </div>
+      <div class="col s12 m6">
+        <p>Find a doctor by specialty:</p>
+        <label>What Are your current symptoms?</label>
+        <input type="text" class="symptoms">
+        <button type="button" id="update-symptoms">Submit</button>
       </div>
     </div>
-  </div>
+    <div class="row">
+      <div class="col s12">
+        <div id="doctor-container" class="row"></div>
+      </div>
+    </div>      
   <script id="raw-query-template" type="text/x-handlebars-template">
       {{#each data}}
         {{#each specialties}}
@@ -51,7 +53,8 @@
   <script id="raw-doctor-template" type="text/x-handlebars-template">
     {{#if data}}
       {{#each data}}
-        <div class="card" style="width: 300px">
+      <div class="col s12 m4 l3">
+        <div class="card">
           <div class="card-image waves-effect waves-block waves-light">
             <img class="activator" src="{{profile.image_url}}">
           </div>
@@ -62,37 +65,38 @@
           </div>
           <div class="card-reveal">
             <span class="card-title grey-text text-darken-4">
-              <a href="#">{{profile.first_name}} {{profile.last_name}}</a><i class="fa fa-times-circle-o fa-2x right" aria-hidden="true"></i></span>
+              <a href="#">{{profile.first_name}} {{profile.last_name}}</a><i class="fa fa-times-circle-o fa-lg right" aria-hidden="true"></i></span>
             <br>
             {{#if practices}}
               {{#each practices}}
-                <div class="">
-                  {{#if accepts_new_patients}}
-                    <p class="accepting">We are accepting new patients!</p>
-                    {{else}}
-                    <p>Not accepting patients at this moment.</p>
-                  {{/if}}
-                  <p><span>Address:</span> {{visit_address.street}}</p> 
-                  <p><span>City:</span> {{visit_address.city}}<span>State:</span> {{visit_address.state}}</p>
-                  {{#if phones}}
-                    {{#each phones}}
-                    <p><span>Phone:</span> {{formatPhoneNumber number}}</p> 
-                    <hr>
-                    {{/each}} 
-                    {{else}}
-                    <p>No Phone Available:</p> 
-                  {{/if}}                 
-                </div>
+              <div class="">
+                {{#if accepts_new_patients}}
+                  <p class="accepting">We are accepting new patients!</p>
+                  {{else}}
+                  <p>Not accepting patients at this moment.</p>
+                {{/if}}
+                <p><span>Address:</span> {{visit_address.street}}</p> 
+                <p><span>City:</span> {{visit_address.city}}<span>State:</span> {{visit_address.state}}</p>
+                {{#if phones}}
+                  {{#each phones}}
+                  <p><span>Phone:</span> {{formatPhoneNumber number}}</p> 
+                  <hr>
+                  {{/each}} 
+                  {{else}}
+                  <p>No Phone Available:</p> 
+                {{/if}}                 
+              </div>
               {{/each}}
             {{else}}
-              <p>no office information</p>
+            <p>no office information</p>
             {{/if}}
-        </div>
-        </div>
-    {{/each}}
-        {{else}}
-          <p>no doctor with that name</p>
-        {{/if}}  
+            </div>
+          </div>
+      </div>
+        {{/each}}
+      {{else}}
+      <p>no doctor with that name</p>
+    {{/if}}  
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
   <script src="./build/js/vendor.min.js"></script>

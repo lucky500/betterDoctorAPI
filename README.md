@@ -39,6 +39,8 @@
 
 * _In your terminal enter:_ ``` $ gulp serve ```
 
+* _PS: you will need an ApiKey from BetterDoctor, please save your apiKey on a file named .env on your root directory, in this format -> exports.apiKey = "yourApiKey";_
+
 
 * _Gulp will serve the file to either port 3000 or next available port_
 
